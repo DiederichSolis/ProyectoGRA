@@ -6,10 +6,7 @@ use super::{
     translucent::TranslucentPipeline, ui::UIPipeline, Pipeline,
 };
 
-/// `PipelineManager` es una estructura encargada de gestionar diferentes pipelines 
-/// gráficos en la aplicación. Los pipelines son responsables de procesar y 
-/// renderizar diferentes tipos de contenido, como objetos principales, objetos 
-/// translúcidos, elementos resaltados y la interfaz de usuario.
+
 pub struct PipelineManager {
     /// Pipeline principal que renderiza los objetos sólidos.
     pub main_pipeline: Option<RefCell<MainPipeline>>,
