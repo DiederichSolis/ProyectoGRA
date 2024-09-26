@@ -1,0 +1,1 @@
+for<'a, 'b, 'c, 'd> fn(bevy::prelude::Commands<'a, 'b>, bevy::prelude::ResMut<'c, bevy::prelude::Assets<bevy::prelude::ColorMaterial>>, bevy::prelude::Res<'d, bevy::prelude::AssetServer>) {setup}

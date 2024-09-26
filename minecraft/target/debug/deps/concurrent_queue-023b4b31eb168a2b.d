@@ -1,0 +1,9 @@
+/Users/diederichsolis/Documents/carpeta sin título/ProyectoGRA/minecraft/target/debug/deps/libconcurrent_queue-023b4b31eb168a2b.rmeta: /Users/diederichsolis/.cargo/registry/src/index.crates.io-6f17d22bba15001f/concurrent-queue-2.5.0/src/lib.rs /Users/diederichsolis/.cargo/registry/src/index.crates.io-6f17d22bba15001f/concurrent-queue-2.5.0/src/bounded.rs /Users/diederichsolis/.cargo/registry/src/index.crates.io-6f17d22bba15001f/concurrent-queue-2.5.0/src/single.rs /Users/diederichsolis/.cargo/registry/src/index.crates.io-6f17d22bba15001f/concurrent-queue-2.5.0/src/unbounded.rs /Users/diederichsolis/.cargo/registry/src/index.crates.io-6f17d22bba15001f/concurrent-queue-2.5.0/src/sync.rs
+
+/Users/diederichsolis/Documents/carpeta sin título/ProyectoGRA/minecraft/target/debug/deps/concurrent_queue-023b4b31eb168a2b.d: /Users/diederichsolis/.cargo/registry/src/index.crates.io-6f17d22bba15001f/concurrent-queue-2.5.0/src/lib.rs /Users/diederichsolis/.cargo/registry/src/index.crates.io-6f17d22bba15001f/concurrent-queue-2.5.0/src/bounded.rs /Users/diederichsolis/.cargo/registry/src/index.crates.io-6f17d22bba15001f/concurrent-queue-2.5.0/src/single.rs /Users/diederichsolis/.cargo/registry/src/index.crates.io-6f17d22bba15001f/concurrent-queue-2.5.0/src/unbounded.rs /Users/diederichsolis/.cargo/registry/src/index.crates.io-6f17d22bba15001f/concurrent-queue-2.5.0/src/sync.rs
+
+/Users/diederichsolis/.cargo/registry/src/index.crates.io-6f17d22bba15001f/concurrent-queue-2.5.0/src/lib.rs:
+/Users/diederichsolis/.cargo/registry/src/index.crates.io-6f17d22bba15001f/concurrent-queue-2.5.0/src/bounded.rs:
+/Users/diederichsolis/.cargo/registry/src/index.crates.io-6f17d22bba15001f/concurrent-queue-2.5.0/src/single.rs:
+/Users/diederichsolis/.cargo/registry/src/index.crates.io-6f17d22bba15001f/concurrent-queue-2.5.0/src/unbounded.rs:
+/Users/diederichsolis/.cargo/registry/src/index.crates.io-6f17d22bba15001f/concurrent-queue-2.5.0/src/sync.rs:

@@ -1,0 +1,11 @@
+/Users/diederichsolis/Documents/carpeta sin título/ProyectoGRA/minecraft/target/debug/deps/libnotify-f7b68db39a16a7ee.rmeta: /Users/diederichsolis/.cargo/registry/src/index.crates.io-6f17d22bba15001f/notify-5.2.0/src/lib.rs /Users/diederichsolis/.cargo/registry/src/index.crates.io-6f17d22bba15001f/notify-5.2.0/src/fsevent.rs /Users/diederichsolis/.cargo/registry/src/index.crates.io-6f17d22bba15001f/notify-5.2.0/src/event.rs /Users/diederichsolis/.cargo/registry/src/index.crates.io-6f17d22bba15001f/notify-5.2.0/src/null.rs /Users/diederichsolis/.cargo/registry/src/index.crates.io-6f17d22bba15001f/notify-5.2.0/src/poll.rs /Users/diederichsolis/.cargo/registry/src/index.crates.io-6f17d22bba15001f/notify-5.2.0/src/config.rs /Users/diederichsolis/.cargo/registry/src/index.crates.io-6f17d22bba15001f/notify-5.2.0/src/error.rs
+
+/Users/diederichsolis/Documents/carpeta sin título/ProyectoGRA/minecraft/target/debug/deps/notify-f7b68db39a16a7ee.d: /Users/diederichsolis/.cargo/registry/src/index.crates.io-6f17d22bba15001f/notify-5.2.0/src/lib.rs /Users/diederichsolis/.cargo/registry/src/index.crates.io-6f17d22bba15001f/notify-5.2.0/src/fsevent.rs /Users/diederichsolis/.cargo/registry/src/index.crates.io-6f17d22bba15001f/notify-5.2.0/src/event.rs /Users/diederichsolis/.cargo/registry/src/index.crates.io-6f17d22bba15001f/notify-5.2.0/src/null.rs /Users/diederichsolis/.cargo/registry/src/index.crates.io-6f17d22bba15001f/notify-5.2.0/src/poll.rs /Users/diederichsolis/.cargo/registry/src/index.crates.io-6f17d22bba15001f/notify-5.2.0/src/config.rs /Users/diederichsolis/.cargo/registry/src/index.crates.io-6f17d22bba15001f/notify-5.2.0/src/error.rs
+
+/Users/diederichsolis/.cargo/registry/src/index.crates.io-6f17d22bba15001f/notify-5.2.0/src/lib.rs:
+/Users/diederichsolis/.cargo/registry/src/index.crates.io-6f17d22bba15001f/notify-5.2.0/src/fsevent.rs:
+/Users/diederichsolis/.cargo/registry/src/index.crates.io-6f17d22bba15001f/notify-5.2.0/src/event.rs:
+/Users/diederichsolis/.cargo/registry/src/index.crates.io-6f17d22bba15001f/notify-5.2.0/src/null.rs:
+/Users/diederichsolis/.cargo/registry/src/index.crates.io-6f17d22bba15001f/notify-5.2.0/src/poll.rs:
+/Users/diederichsolis/.cargo/registry/src/index.crates.io-6f17d22bba15001f/notify-5.2.0/src/config.rs:
+/Users/diederichsolis/.cargo/registry/src/index.crates.io-6f17d22bba15001f/notify-5.2.0/src/error.rs:

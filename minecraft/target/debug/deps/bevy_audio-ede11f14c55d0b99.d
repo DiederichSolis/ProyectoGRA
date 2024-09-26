@@ -1,0 +1,9 @@
+/Users/diederichsolis/Documents/carpeta sin título/ProyectoGRA/minecraft/target/debug/deps/libbevy_audio-ede11f14c55d0b99.rmeta: /Users/diederichsolis/.cargo/registry/src/index.crates.io-6f17d22bba15001f/bevy_audio-0.10.1/src/lib.rs /Users/diederichsolis/.cargo/registry/src/index.crates.io-6f17d22bba15001f/bevy_audio-0.10.1/src/audio.rs /Users/diederichsolis/.cargo/registry/src/index.crates.io-6f17d22bba15001f/bevy_audio-0.10.1/src/audio_output.rs /Users/diederichsolis/.cargo/registry/src/index.crates.io-6f17d22bba15001f/bevy_audio-0.10.1/src/audio_source.rs /Users/diederichsolis/.cargo/registry/src/index.crates.io-6f17d22bba15001f/bevy_audio-0.10.1/src/sinks.rs
+
+/Users/diederichsolis/Documents/carpeta sin título/ProyectoGRA/minecraft/target/debug/deps/bevy_audio-ede11f14c55d0b99.d: /Users/diederichsolis/.cargo/registry/src/index.crates.io-6f17d22bba15001f/bevy_audio-0.10.1/src/lib.rs /Users/diederichsolis/.cargo/registry/src/index.crates.io-6f17d22bba15001f/bevy_audio-0.10.1/src/audio.rs /Users/diederichsolis/.cargo/registry/src/index.crates.io-6f17d22bba15001f/bevy_audio-0.10.1/src/audio_output.rs /Users/diederichsolis/.cargo/registry/src/index.crates.io-6f17d22bba15001f/bevy_audio-0.10.1/src/audio_source.rs /Users/diederichsolis/.cargo/registry/src/index.crates.io-6f17d22bba15001f/bevy_audio-0.10.1/src/sinks.rs
+
+/Users/diederichsolis/.cargo/registry/src/index.crates.io-6f17d22bba15001f/bevy_audio-0.10.1/src/lib.rs:
+/Users/diederichsolis/.cargo/registry/src/index.crates.io-6f17d22bba15001f/bevy_audio-0.10.1/src/audio.rs:
+/Users/diederichsolis/.cargo/registry/src/index.crates.io-6f17d22bba15001f/bevy_audio-0.10.1/src/audio_output.rs:
+/Users/diederichsolis/.cargo/registry/src/index.crates.io-6f17d22bba15001f/bevy_audio-0.10.1/src/audio_source.rs:
+/Users/diederichsolis/.cargo/registry/src/index.crates.io-6f17d22bba15001f/bevy_audio-0.10.1/src/sinks.rs:
