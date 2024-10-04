@@ -1,1 +1,0 @@
-for<'a, 'b, 'c, 'd, 'e> fn(bevy::prelude::Res<'a, bevy::prelude::Time>, bevy::prelude::Query<'b, 'c, (&'d mut bevy::prelude::Transform, &'e bevy::prelude::DirectionalLight)>) {update_light}

@@ -16,30 +16,24 @@ use crate::{collision::CollisionBox, world::CHUNK_SIZE};
 const SENSITIVITY: f32 = 0.001;
 const CAMERA_SPEED: f32 = 10.0;
 const GRAVITY: f32 = 10.0;
-pub static PLAYER_VIEW_OFFSET: Vec3 = vec3(0.4, 1.0, 0.4); /* Esto es una solución temporal, deberíamos arreglar la vista de la cámara */
+pub static PLAYER_VIEW_OFFSET: Vec3 = vec3(0.4, 1.0, 0.4); /* this is kind of a hack, we should fix the camera's eye */
 
-/// Duración de un salto en segundos.
 lazy_static! {
     static ref JUMP_DURATION: Duration = Duration::from_secs_f32(0.1);
 }
-/// Altura del salto del jugador.
 const JUMP_HEIGHT: f32 = 1.5;
 
-/// Controlador de la cámara del jugador.
 pub struct CameraController {
     pub movement_vector: Vec3,
 }
 
 impl Default for CameraController {
-    /// Configuración por defecto del controlador de la cámara. Inicializa el vector de movimiento a (0.0, 0.0, 0.0).
     fn default() -> Self {
         Self {
             movement_vector: vec3(0.0, 0.0, 0.0),
         }
     }
 }
-
-/// Estructura del jugador con su cámara y estado actual (como si está en el suelo, saltando o en agua).
 pub struct Player {
     pub camera: Camera,
     pub current_chunk: (i32, i32),
@@ -52,9 +46,7 @@ pub struct Player {
     pub facing_block: Option<Arc<RwLock<Block>>>,
     pub facing_face: Option<FaceDirections>,
 }
-
 impl Player {
-    /// Actualiza la posición de la cámara del jugador y la envía a la GPU.
     pub fn update(&mut self) {
         self.camera.queue.write_buffer(
             &self.camera.position_buffer,
@@ -62,13 +54,10 @@ impl Player {
             bytemuck::cast_slice(&[self.camera.eye]),
         )
     }
-
-    /// Obtiene la posición relativa del jugador dentro de su chunk actual.
+    // Position relative to the chunk
     pub fn to_relative_position(&self) -> glam::Vec3 {
         todo!();
     }
-
-    /// Devuelve la caja de colisión que representa al jugador.
     pub fn get_collision(&self) -> crate::collision::CollisionBox {
         crate::collision::CollisionBox::new(
             self.camera.eye.x - 0.4,
@@ -79,10 +68,8 @@ impl Player {
             0.8,
         )
     }
-
-    /// Cambia el bloque que el jugador está colocando con un desplazamiento.
     pub fn next_placing_block(&mut self, offset: i32) {
-        // Delta es {1, -1}
+        // Delta is {1, -1}
         let placing_block_id = self.placing_block.to_id();
         let mut next_block_id = (((placing_block_id as i32 + offset)
             + (BlockType::MAX_ID + 1) as i32)
@@ -94,8 +81,7 @@ impl Player {
 
         self.placing_block = BlockType::from_id(next_block_id as u32);
     }
-
-    /// Obtiene el bloque al que el jugador está mirando y su cara.
+    // Gets the block that the player is facing
     pub fn get_facing_block(
         &mut self,
         blocks: &Vec<Arc<RwLock<Block>>>,
@@ -144,7 +130,7 @@ impl Player {
 
         match (block_collision, point) {
             (Some(block_collision), Some(point)) => {
-                // TODO: Esto puede pre-calcularse
+                // TODO: This can be precomputed
                 let point_dir = ((block_collision.center() - point).normalize()) * -1.0;
 
                 let face_directions = FaceDirections::all();
@@ -161,8 +147,6 @@ impl Player {
             _ => None,
         }
     }
-
-    /// Calcula el chunk actual en el que se encuentra el jugador basándose en su posición.
     pub fn calc_current_chunk(&self) -> (i32, i32) {
         (
             f32::floor(self.camera.eye.x / CHUNK_SIZE as f32) as i32,
@@ -170,16 +154,13 @@ impl Player {
         )
     }
 
-    /* TODO: Esto probablemente puede optimizarse */
-    /// Mueve la cámara del jugador en función de la dirección y el tiempo transcurrido.
-    /// Verifica colisiones con bloques y maneja el estado de estar en agua o en tierra.
+    /* TODO: This probably can be optimized */
     pub fn move_camera(
         &mut self,
         direction: &Vec3,
         delta_time: f32,
         blocks: &Vec<Arc<RwLock<Block>>>,
     ) {
-        // Lógica para el movimiento de la cámara
         let input_direction = direction;
         let player_collision = self.get_collision();
 
@@ -273,8 +254,6 @@ impl Player {
         self.camera.eye += velocity;
     }
 }
-
-/// Estructura de la cámara con parámetros como posición, orientación y matrices de proyección.
 pub struct Camera {
     pub eye: Vec3,
     pub yaw: f32,
@@ -292,14 +271,12 @@ pub struct Camera {
 }
 
 impl Camera {
-    /// Crea una nueva cámara con parámetros de posición y proyección.
     pub fn new(
         surface_width: f32,
         surface_height: f32,
         device: Arc<wgpu::Device>,
         queue: Arc<wgpu::Queue>,
     ) -> Camera {
-        // Inicialización de la cámara
         let (eye, yaw, pitch) = if let Ok((eye, yaw, pitch)) = Camera::load(Box::new(())) {
             (eye, yaw, pitch)
         } else {
@@ -350,25 +327,17 @@ impl Camera {
             needs_update: false,
         }
     }
-
-    /// Construye la matriz de vista (view matrix) basada en la posición y orientación de la cámara.
     pub fn build_view_matrix(&self) -> glam::Mat4 {
         glam::Mat4::look_at_lh(self.eye, self.eye + self.get_forward_dir(), glam::Vec3::Y)
     }
-
-    /// Construye la matriz de proyección (projection matrix) para la cámara.
     pub fn build_projection_matrix(&self) -> glam::Mat4 {
         glam::Mat4::perspective_lh(self.fovy, self.aspect_ratio, self.znear, self.zfar)
     }
-
-    /// Obtiene la dirección hacia la derecha (right direction) de la cámara.
     pub fn get_right_dir(&self) -> glam::Vec3 {
         glam::vec3(0.0, 1.0, 0.0).cross(self.get_forward_dir())
     }
 
-    /// Obtiene la dirección hacia adelante (forward direction) de la cámara.
     pub fn get_forward_dir(&self) -> glam::Vec3 {
-        // Cálculo de la dirección hacia adelante
         let mut direction = glam::Vec3::ZERO;
 
         direction.x = f32::cos(self.yaw) * f32::cos(self.pitch);
@@ -378,7 +347,7 @@ impl Camera {
         direction.normalize()
     }
 
-    /// Mueve el objetivo de la cámara en función de la dirección dada en el plano X-Y.
+    // target only moves in y and x direction
     pub fn move_target(&mut self, direction: &Vec2) {
         self.yaw -= direction.x * SENSITIVITY;
         self.pitch -= direction.y * SENSITIVITY;
@@ -387,7 +356,7 @@ impl Camera {
     }
 }
 
-impl Saveable<glam::Vec3> for Player {
+impl Saveable<glam::Vec3> for Camera {
     fn save(&self) -> Result<(), Box<dyn Error>> {
         if std::fs::create_dir("data").is_ok() {
             println!("Created dir");
@@ -404,7 +373,7 @@ impl Saveable<glam::Vec3> for Player {
     }
 }
 
-impl Loadable<glam::Vec3> for Player {
+impl Loadable<(glam::Vec3, f32, f32)> for Camera {
     fn load(_: Box<dyn Any>) -> Result<(Vec3, f32, f32), Box<dyn Error>> {
         let data = String::from_utf8(std::fs::read("data/player")?)?;
         let mut data = data.split(',');

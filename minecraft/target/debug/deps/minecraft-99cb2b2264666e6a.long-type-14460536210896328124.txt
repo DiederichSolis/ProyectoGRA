@@ -1,1 +1,0 @@
-for<'a, 'b, 'c, 'd, 'e> fn(&'a mut bevy::prelude::Commands<'b, 'c>, bevy::prelude::ResMut<'d, bevy::prelude::Assets<bevy::prelude::ColorMaterial>>, bevy::prelude::ResMut<'e, bevy::prelude::Assets<bevy::prelude::Mesh>>) {setup}

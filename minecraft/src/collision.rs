@@ -1,30 +1,25 @@
-// Estructura que representa una caja de colisión con coordenadas mínimas y máximas en los ejes x, y, z.
 #[derive(Debug, Clone)]
 pub struct CollisionBox {
-    pub min_x: f32, // Coordenada mínima en el eje X
-    pub max_x: f32, // Coordenada máxima en el eje X
-    pub min_y: f32, // Coordenada mínima en el eje Y
-    pub max_y: f32, // Coordenada máxima en el eje Y
-    pub min_z: f32, // Coordenada mínima en el eje Z
-    pub max_z: f32, // Coordenada máxima en el eje Z
+    pub min_x: f32,
+    pub max_x: f32,
+    pub min_y: f32,
+    pub max_y: f32,
+    pub min_z: f32,
+    pub max_z: f32,
 }
 
-// Estructura que representa un punto de colisión con coordenadas x, y, z.
 pub struct CollisionPoint {
-    pub x: f32, // Coordenada X del punto de colisión
-    pub y: f32, // Coordenada Y del punto de colisión
-    pub z: f32, // Coordenada Z del punto de colisión
+    pub x: f32,
+    pub y: f32,
+    pub z: f32,
 }
 
-// Estructura que representa un rayo con un origen y una dirección.
 pub struct Ray {
-    pub origin: glam::Vec3,    // Origen del rayo
-    pub direction: glam::Vec3, // Dirección del rayo
+    pub origin: glam::Vec3,
+    pub direction: glam::Vec3,
 }
 
 impl Ray {
-    // Método que verifica si un rayo intersecta una caja de colisión.
-    // Devuelve un vector de puntos de intersección si hay una colisión.
     pub fn intersects_box(&self, collision_box: &CollisionBox) -> Option<Vec<glam::Vec3>> {
         let mut tmin;
         let mut tmax;
@@ -33,12 +28,10 @@ impl Ray {
         let tzmin;
         let tzmax;
 
-        // Calculamos los inversos de las direcciones del rayo.
         let invdirx = 1.0 / self.direction.x;
         let invdiry = 1.0 / self.direction.y;
         let invdirz = 1.0 / self.direction.z;
 
-        // Calculamos tmin y tmax para el eje X.
         if invdirx >= 0.0 {
             tmin = (collision_box.min_x - self.origin.x) * invdirx;
             tmax = (collision_box.max_x - self.origin.x) * invdirx;
@@ -47,7 +40,6 @@ impl Ray {
             tmax = (collision_box.min_x - self.origin.x) * invdirx;
         }
 
-        // Calculamos tymin y tymax para el eje Y.
         if invdiry >= 0.0 {
             tymin = (collision_box.min_y - self.origin.y) * invdiry;
             tymax = (collision_box.max_y - self.origin.y) * invdiry;
@@ -56,18 +48,16 @@ impl Ray {
             tymax = (collision_box.min_y - self.origin.y) * invdiry;
         }
 
-        // Verificamos si hay intersección en el eje X y Y.
         if tmin > tymax || tymin > tmax {
-            return None; // No hay intersección.
+            return None;
         }
         if tymin > tmin {
-            tmin = tymin; // Actualizamos tmin si es necesario.
+            tmin = tymin;
         }
         if tymax < tmax {
-            tmax = tymax; // Actualizamos tmax si es necesario.
+            tmax = tymax;
         }
 
-        // Calculamos tzmin y tzmax para el eje Z.
         if invdirz >= 0.0 {
             tzmin = (collision_box.min_z - self.origin.z) * invdirz;
             tzmax = (collision_box.max_z - self.origin.z) * invdirz;
@@ -76,42 +66,37 @@ impl Ray {
             tzmax = (collision_box.min_z - self.origin.z) * invdirz;
         }
 
-        // Verificamos si hay intersección en el eje Z y en el tiempo t.
         if tmin > tzmax || tzmin > tmax || tmin < 0.0 || tmax < 0.0 {
-            return None; // No hay intersección.
+            return None;
         }
 
         if tzmin > tmin {
-            tmin = tzmin; // Actualizamos tmin si es necesario.
+            tmin = tzmin;
         }
         if tzmax < tmax {
-            tmax = tzmax; // Actualizamos tmax si es necesario.
+            tmax = tzmax;
         }
 
-        // Devolvemos los puntos de intersección.
         Some(vec![
-            self.origin + self.direction * tmin, // Punto de entrada
-            self.origin + self.direction * tmax, // Punto de salida
+            self.origin + self.direction * tmin,
+            self.origin + self.direction * tmax,
         ])
     }
 }
 
-// Estructura que representa el resultado de una intersección de rayo.
 #[derive(Debug)]
 pub struct RayResult {
-    pub points: Vec<glam::Vec3>, // Puntos de intersección
-    pub collision: CollisionBox,   // Caja de colisión correspondiente
+    pub points: Vec<glam::Vec3>,
+    pub collision: CollisionBox,
 }
 
 impl CollisionPoint {
-    // Constructor para crear un nuevo CollisionPoint.
     pub fn new(x: f32, y: f32, z: f32) -> CollisionPoint {
         CollisionPoint { x, y, z }
     }
 }
 
 impl CollisionBox {
-    // Método que devuelve el centro de la caja de colisión.
     pub fn center(&self) -> glam::Vec3 {
         glam::vec3(
             self.min_x + (self.max_x - self.min_x) / 2.0,
@@ -119,8 +104,6 @@ impl CollisionBox {
             self.min_z + (self.max_z - self.min_z) / 2.0,
         )
     }
-
-    // Método para crear una CollisionBox a partir de la posición de un bloque.
     pub fn from_block_position(x: f32, y: f32, z: f32) -> Self {
         CollisionBox {
             min_x: x,
@@ -131,13 +114,9 @@ impl CollisionBox {
             max_z: z + 1.0,
         }
     }
-
-    // Método que devuelve la posición de un bloque a partir de la caja de colisión.
     pub fn to_block_position(&self) -> glam::Vec3 {
         glam::vec3(self.min_x, self.min_y, self.min_z)
     }
-
-    // Constructor para crear una nueva CollisionBox con dimensiones específicas.
     pub fn new(x: f32, y: f32, z: f32, width: f32, height: f32, depth: f32) -> CollisionBox {
         CollisionBox {
             min_x: x,
@@ -148,8 +127,6 @@ impl CollisionBox {
             max_z: z + depth,
         }
     }
-
-    // Método que verifica si un CollisionPoint intersecta con la caja de colisión.
     pub fn intersects_point(&self, point: &CollisionPoint) -> bool {
         point.x >= self.min_x
             && point.x <= self.max_x
@@ -158,8 +135,6 @@ impl CollisionBox {
             && point.z >= self.min_z
             && point.z <= self.max_z
     }
-
-    // Método que verifica si esta caja de colisión intersecta con otra.
     pub fn intersects(&self, other: &CollisionBox) -> bool {
         self.min_x <= other.max_x
             && self.max_x >= other.min_x
@@ -168,14 +143,11 @@ impl CollisionBox {
             && self.min_z <= other.max_z
             && self.max_z >= other.min_z
     }
-
-    // Método de intersección de dirección (pendiente de implementación).
     pub fn intersects_direction() {
         todo!()
     }
 }
 
-// Implementación de la operación de suma para CollisionBox con glam::Vec3.
 impl std::ops::Add<glam::Vec3> for CollisionBox {
     type Output = CollisionBox;
 

@@ -1,8 +1,0 @@
-/Users/diederichsolis/Documents/carpeta sin título/ProyectoGRA/minecraft/target/debug/deps/libowned_ttf_parser-05d65e34c7d530e9.rmeta: /Users/diederichsolis/.cargo/registry/src/index.crates.io-6f17d22bba15001f/owned_ttf_parser-0.24.0/src/lib.rs /Users/diederichsolis/.cargo/registry/src/index.crates.io-6f17d22bba15001f/owned_ttf_parser-0.24.0/src/convert.rs /Users/diederichsolis/.cargo/registry/src/index.crates.io-6f17d22bba15001f/owned_ttf_parser-0.24.0/src/owned.rs /Users/diederichsolis/.cargo/registry/src/index.crates.io-6f17d22bba15001f/owned_ttf_parser-0.24.0/src/preparse.rs
-
-/Users/diederichsolis/Documents/carpeta sin título/ProyectoGRA/minecraft/target/debug/deps/owned_ttf_parser-05d65e34c7d530e9.d: /Users/diederichsolis/.cargo/registry/src/index.crates.io-6f17d22bba15001f/owned_ttf_parser-0.24.0/src/lib.rs /Users/diederichsolis/.cargo/registry/src/index.crates.io-6f17d22bba15001f/owned_ttf_parser-0.24.0/src/convert.rs /Users/diederichsolis/.cargo/registry/src/index.crates.io-6f17d22bba15001f/owned_ttf_parser-0.24.0/src/owned.rs /Users/diederichsolis/.cargo/registry/src/index.crates.io-6f17d22bba15001f/owned_ttf_parser-0.24.0/src/preparse.rs
-
-/Users/diederichsolis/.cargo/registry/src/index.crates.io-6f17d22bba15001f/owned_ttf_parser-0.24.0/src/lib.rs:
-/Users/diederichsolis/.cargo/registry/src/index.crates.io-6f17d22bba15001f/owned_ttf_parser-0.24.0/src/convert.rs:
-/Users/diederichsolis/.cargo/registry/src/index.crates.io-6f17d22bba15001f/owned_ttf_parser-0.24.0/src/owned.rs:
-/Users/diederichsolis/.cargo/registry/src/index.crates.io-6f17d22bba15001f/owned_ttf_parser-0.24.0/src/preparse.rs:

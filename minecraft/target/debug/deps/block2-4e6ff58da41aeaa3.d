@@ -1,0 +1,10 @@
+/Users/diederichsolis/Documents/carpeta sin título/RustyCraft/target/debug/deps/libblock2-4e6ff58da41aeaa3.rmeta: /Users/diederichsolis/.cargo/registry/src/index.crates.io-6f17d22bba15001f/block2-0.3.0/src/lib.rs /Users/diederichsolis/.cargo/registry/src/index.crates.io-6f17d22bba15001f/block2-0.3.0/src/block.rs /Users/diederichsolis/.cargo/registry/src/index.crates.io-6f17d22bba15001f/block2-0.3.0/src/concrete_block.rs /Users/diederichsolis/.cargo/registry/src/index.crates.io-6f17d22bba15001f/block2-0.3.0/src/debug.rs /Users/diederichsolis/.cargo/registry/src/index.crates.io-6f17d22bba15001f/block2-0.3.0/src/global.rs /Users/diederichsolis/.cargo/registry/src/index.crates.io-6f17d22bba15001f/block2-0.3.0/src/rc_block.rs
+
+/Users/diederichsolis/Documents/carpeta sin título/RustyCraft/target/debug/deps/block2-4e6ff58da41aeaa3.d: /Users/diederichsolis/.cargo/registry/src/index.crates.io-6f17d22bba15001f/block2-0.3.0/src/lib.rs /Users/diederichsolis/.cargo/registry/src/index.crates.io-6f17d22bba15001f/block2-0.3.0/src/block.rs /Users/diederichsolis/.cargo/registry/src/index.crates.io-6f17d22bba15001f/block2-0.3.0/src/concrete_block.rs /Users/diederichsolis/.cargo/registry/src/index.crates.io-6f17d22bba15001f/block2-0.3.0/src/debug.rs /Users/diederichsolis/.cargo/registry/src/index.crates.io-6f17d22bba15001f/block2-0.3.0/src/global.rs /Users/diederichsolis/.cargo/registry/src/index.crates.io-6f17d22bba15001f/block2-0.3.0/src/rc_block.rs
+
+/Users/diederichsolis/.cargo/registry/src/index.crates.io-6f17d22bba15001f/block2-0.3.0/src/lib.rs:
+/Users/diederichsolis/.cargo/registry/src/index.crates.io-6f17d22bba15001f/block2-0.3.0/src/block.rs:
+/Users/diederichsolis/.cargo/registry/src/index.crates.io-6f17d22bba15001f/block2-0.3.0/src/concrete_block.rs:
+/Users/diederichsolis/.cargo/registry/src/index.crates.io-6f17d22bba15001f/block2-0.3.0/src/debug.rs:
+/Users/diederichsolis/.cargo/registry/src/index.crates.io-6f17d22bba15001f/block2-0.3.0/src/global.rs:
+/Users/diederichsolis/.cargo/registry/src/index.crates.io-6f17d22bba15001f/block2-0.3.0/src/rc_block.rs:

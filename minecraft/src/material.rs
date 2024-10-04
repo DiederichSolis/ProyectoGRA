@@ -2,19 +2,7 @@ use crate::{state::State, utils::noise::perlin_noise};
 use image::GenericImageView;
 
 impl Texture {
-    /// Formato de textura para profundidad
     pub const DEPTH_FORMAT: wgpu::TextureFormat = wgpu::TextureFormat::Depth32Float;
-
-    /// Crea una textura de profundidad.
-    ///
-    /// Esta función genera una textura para el buffer de profundidad de acuerdo con el tamaño de la ventana
-    /// definida en `state`.
-    ///
-    /// # Parámetros:
-    /// - `state`: Referencia al estado actual, que contiene información sobre el dispositivo gráfico y la configuración de la superficie.
-    ///
-    /// # Retorno:
-    /// Devuelve una instancia de `Texture` con la textura de profundidad creada.
     pub fn create_depth_texture(state: &State) -> Self {
         let size = wgpu::Extent3d {
             width: state.surface_config.width,
@@ -40,7 +28,7 @@ impl Texture {
             mag_filter: wgpu::FilterMode::Linear,
             min_filter: wgpu::FilterMode::Linear,
             mipmap_filter: wgpu::FilterMode::Nearest,
-            compare: Some(wgpu::CompareFunction::LessEqual),
+            compare: Some(wgpu::CompareFunction::LessEqual), // 5.
             lod_min_clamp: 0.0,
             lod_max_clamp: 100.0,
             ..Default::default()
@@ -53,20 +41,7 @@ impl Texture {
             name: String::from("depth_texture"),
         }
     }
-
-    /// Crea una textura usando Perlin Noise.
-    ///
-    /// Esta función genera una textura utilizando el algoritmo de Perlin Noise con las dimensiones y
-    /// frecuencia indicadas.
-    ///
-    /// # Parámetros:
-    /// - `width`: Ancho de la textura.
-    /// - `height`: Altura de la textura.
-    /// - `frequency`: Frecuencia del ruido de Perlin.
-    /// - `state`: Referencia al estado que contiene el dispositivo gráfico y la cola de comandos.
-    ///
-    /// # Retorno:
-    /// Devuelve una textura que contiene ruido de Perlin.
+    //
     pub fn create_perlin_noise_texture(
         width: u32,
         height: u32,
@@ -138,18 +113,6 @@ impl Texture {
         }
     }
 
-    /// Carga una textura desde un array de bytes en memoria.
-    ///
-    /// Esta función carga una textura desde una imagen en memoria.
-    ///
-    /// # Parámetros:
-    /// - `bytes`: Array de bytes que representa la imagen.
-    /// - `name`: Nombre de la textura.
-    /// - `device`: Referencia al dispositivo gráfico.
-    /// - `queue`: Cola para ejecutar los comandos gráficos.
-    ///
-    /// # Retorno:
-    /// Devuelve un `Result` que contiene una instancia de `Texture` si es exitoso.
     pub fn from_bytes(
         bytes: &[u8],
         name: String,
@@ -206,19 +169,6 @@ impl Texture {
             data: None,
         })
     }
-
-    /// Carga una textura desde un archivo en el sistema de archivos.
-    ///
-    /// Esta función carga una textura desde una ruta especificada en el sistema de archivos.
-    ///
-    /// # Parámetros:
-    /// - `path`: Ruta del archivo de la imagen.
-    /// - `name`: Nombre de la textura.
-    /// - `device`: Referencia al dispositivo gráfico.
-    /// - `queue`: Cola para ejecutar los comandos gráficos.
-    ///
-    /// # Retorno:
-    /// Devuelve un `Result` que contiene una instancia de `Texture` si es exitoso.
     pub fn from_path(
         path: &str,
         name: String,

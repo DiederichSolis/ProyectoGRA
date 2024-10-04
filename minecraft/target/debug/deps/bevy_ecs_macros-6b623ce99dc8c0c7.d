@@ -1,9 +1,0 @@
-/Users/diederichsolis/Documents/carpeta sin título/ProyectoGRA/minecraft/target/debug/deps/libbevy_ecs_macros-6b623ce99dc8c0c7.dylib: /Users/diederichsolis/.cargo/registry/src/index.crates.io-6f17d22bba15001f/bevy_ecs_macros-0.10.1/src/lib.rs /Users/diederichsolis/.cargo/registry/src/index.crates.io-6f17d22bba15001f/bevy_ecs_macros-0.10.1/src/component.rs /Users/diederichsolis/.cargo/registry/src/index.crates.io-6f17d22bba15001f/bevy_ecs_macros-0.10.1/src/fetch.rs /Users/diederichsolis/.cargo/registry/src/index.crates.io-6f17d22bba15001f/bevy_ecs_macros-0.10.1/src/set.rs /Users/diederichsolis/.cargo/registry/src/index.crates.io-6f17d22bba15001f/bevy_ecs_macros-0.10.1/src/states.rs
-
-/Users/diederichsolis/Documents/carpeta sin título/ProyectoGRA/minecraft/target/debug/deps/bevy_ecs_macros-6b623ce99dc8c0c7.d: /Users/diederichsolis/.cargo/registry/src/index.crates.io-6f17d22bba15001f/bevy_ecs_macros-0.10.1/src/lib.rs /Users/diederichsolis/.cargo/registry/src/index.crates.io-6f17d22bba15001f/bevy_ecs_macros-0.10.1/src/component.rs /Users/diederichsolis/.cargo/registry/src/index.crates.io-6f17d22bba15001f/bevy_ecs_macros-0.10.1/src/fetch.rs /Users/diederichsolis/.cargo/registry/src/index.crates.io-6f17d22bba15001f/bevy_ecs_macros-0.10.1/src/set.rs /Users/diederichsolis/.cargo/registry/src/index.crates.io-6f17d22bba15001f/bevy_ecs_macros-0.10.1/src/states.rs
-
-/Users/diederichsolis/.cargo/registry/src/index.crates.io-6f17d22bba15001f/bevy_ecs_macros-0.10.1/src/lib.rs:
-/Users/diederichsolis/.cargo/registry/src/index.crates.io-6f17d22bba15001f/bevy_ecs_macros-0.10.1/src/component.rs:
-/Users/diederichsolis/.cargo/registry/src/index.crates.io-6f17d22bba15001f/bevy_ecs_macros-0.10.1/src/fetch.rs:
-/Users/diederichsolis/.cargo/registry/src/index.crates.io-6f17d22bba15001f/bevy_ecs_macros-0.10.1/src/set.rs:
-/Users/diederichsolis/.cargo/registry/src/index.crates.io-6f17d22bba15001f/bevy_ecs_macros-0.10.1/src/states.rs:

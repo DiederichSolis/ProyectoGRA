@@ -1,8 +1,3 @@
-///El código define una estructura State en Rust para gestionar el estado de un entorno gráfico utilizando la biblioteca wgpu. Esta estructura incluye la configuración de la superficie,
-///  un adaptador, un dispositivo y una cola de comandos, así como referencias a la ventana y al mundo del juego. En su implementación, la estructura permite la inicialización del entorno gráfico y el manejo de entradas del teclado y el ratón, incluyendo el movimiento del jugador y la colocación o eliminación de bloques. También incluye métodos para guardar el estado,
-///  actualizar la lógica del juego, y renderizar el contenido en la pantalla, utilizando diferentes tuberías de renderizado para diferentes tipos de bloques y elementos de interfaz. La estructura está diseñada para trabajar con componentes como cámaras, jugadores y un mundo que se puede modificar dinámicamente.
-/// 
-
 use std::sync::Arc;
 use std::sync::{Mutex, RwLock};
 use winit::event::MouseButton;
@@ -223,35 +218,26 @@ impl State {
                 .expect("Cannot be not facing a face if it's facing a block");
             match button {
                 MouseButton::Left => {
-                    self.world.remove_block(facing_block.clone());
+                
                 }
                 MouseButton::Right => {
                     let block_borrow = facing_block.read().unwrap();
                     let new_block_abs_position =
                         block_borrow.absolute_position + facing_face.get_normal_vector();
-
+    
                     let chunk = new_block_abs_position.get_chunk_from_position_absolute();
                     let position = new_block_abs_position.relative_from_absolute();
-
+    
                     println!("Placing block {:?}", player.placing_block);
-                    let new_block = Arc::new(RwLock::new(Block::new(
-                        position,
-                        chunk,
-                        player.placing_block,
-                    )));
-
-                    self.world.place_block(new_block);
+    
+                   
                 }
                 _ => {}
             }
         }
     }
-    pub fn handle_wheel(&mut self, delta: f32) {
-        self.player
-            .write()
-            .unwrap()
-            .next_placing_block(delta as i32);
-    }
+    
+   
     pub fn handle_mouse(&mut self, delta: &glam::Vec2) {
         self.player.write().unwrap().camera.move_target(delta)
     }
@@ -283,8 +269,7 @@ impl State {
         if let Some((block, face_dir)) = player.get_facing_block(&nearby_blocks) {
             let block = self.world.get_blocks_absolute(&block.to_block_position());
 
-            player.facing_block = block;
-            player.facing_face = Some(face_dir);
+          
         } else {
             player.facing_block = None;
             player.facing_face = None;
@@ -376,4 +361,3 @@ impl State {
 pub struct Config {
     pub polygon_mode: wgpu::PolygonMode,
 }
- 

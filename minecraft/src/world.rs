@@ -1,16 +1,3 @@
-///Este código define una estructura llamada World que representa un 
-/// mundo en un juego de tipo voxel, como Minecraft. Utiliza una serie
-///  de constantes para configurar el tamaño de los chunks, la altura,
-///  y otros parámetros relevantes. La estructura World contiene un 
-/// mapa de chunks, un grupo de hilos para manejar tareas concurrentes
-/// , y otros componentes necesarios para la renderización y el manejo de bloques.
-///  Dentro de la implementación de World, se encuentran métodos para colocar
-///  y eliminar bloques, obtener bloques cercanos, actualizar la posición del jugador 
-/// y gestionar la carga y descarga de chunks según la posición del jugador. 
-/// La clase también incluye métodos para inicializar el mundo y manejar 
-/// la renderización de los chunks, utilizando un sistema de multitarea para mejorar el 
-/// rendimiento al procesar datos en paralelo. Además, maneja la lógica de bloques de agua y su reemplazo cuando se eliminan bloques adyacentes, asegurando la coherencia del entorno.
-/// 
 use crate::blocks::block_type::BlockType;
 use crate::persistence::Saveable;
 use crate::utils::{ChunkFromPosition, RelativeFromAbsolute};
@@ -27,13 +14,13 @@ use std::{
 pub const RNG_SEED: u64 = 0;
 pub const CHUNK_SIZE: u32 = 16;
 pub const CHUNK_HEIGHT: u8 = u8::MAX;
-pub const NOISE_SIZE: u32 = 1024;
+pub const NOISE_SIZE: u32 = 200;
 pub const FREQUENCY: f32 = 1. / 128.;
 pub const NOISE_CHUNK_PER_ROW: u32 = NOISE_SIZE / CHUNK_SIZE;
-pub const MAX_TREES_PER_CHUNK: u32 = 3;
-pub const CHUNKS_PER_ROW: u32 = 20;
+pub const MAX_TREES_PER_CHUNK: u32 = 2;
+pub const CHUNKS_PER_ROW: u32 = 5;
 pub const CHUNKS_REGION: u32 = CHUNKS_PER_ROW * CHUNKS_PER_ROW;
-pub const WATER_HEIGHT_LEVEL: u8 = 5;
+pub const WATER_HEIGHT_LEVEL: u8 = 3;
 // Lower bound of chunk
 pub const LB: i32 = -((CHUNKS_PER_ROW / 2) as i32);
 // Upper bound of chunk
@@ -60,74 +47,7 @@ pub struct World {
 }
 
 impl World {
-    pub fn place_block(&mut self, block: Arc<RwLock<Block>>) {
-        let block_borrow = block.read().unwrap();
-        let mut chunks_to_rerender = vec![block_borrow.get_chunk_coords()];
-        chunks_to_rerender.append(&mut block_borrow.get_neighbour_chunks_coords());
-
-        let chunk_map = self.chunks.read().unwrap();
-        let chunk = chunk_map
-            .get(&chunks_to_rerender[0])
-            .expect("Cannot delete a block from unloaded chunk");
-
-        {
-            let mut chunk_lock = chunk.write().unwrap();
-            chunk_lock.add_block(block.clone(), true);
-            // Drop chunk lock write
-        }
-
-        self.render_chunks(chunks_to_rerender)
-    }
-    pub fn remove_block(&mut self, block: Arc<RwLock<Block>>) {
-        let mut has_adjacent_water = false;
-        let mut chunks_to_rerender = vec![];
-        {
-            let block_borrow = block.read().unwrap();
-            chunks_to_rerender.push(block_borrow.get_chunk_coords());
-            chunks_to_rerender.append(&mut block_borrow.get_neighbour_chunks_coords());
-
-            let chunk_map = self.chunks.read().unwrap();
-            let chunk = chunk_map
-                .get(&chunks_to_rerender[0])
-                .expect("Cannot delete a block from unloaded chunk");
-
-            {
-                let mut chunk_lock = chunk.write().unwrap();
-                chunk_lock.remove_block(&(block_borrow.position));
-                // Drop chunk lock write
-            }
-
-            for offset in [
-                glam::vec3(1.0, 0.0, 0.0),
-                glam::vec3(-1.0, 0.0, 0.0),
-                glam::vec3(0.0, 0.0, 1.0),
-                glam::vec3(0.0, 0.0, -1.0),
-            ] {
-                let position = block_borrow.absolute_position + offset;
-                let chunk_pos = position.get_chunk_from_position_absolute();
-                let chunk = chunk_map
-                    .get(&chunk_pos)
-                    .expect("Should be loaded chunk")
-                    .read()
-                    .unwrap();
-
-                if chunk.block_type_at(&position.relative_from_absolute()) == Some(BlockType::Water)
-                {
-                    has_adjacent_water = true;
-                }
-            }
-        }
-
-        // if it has a nearby block of water, replace the removed block with a water block.
-        if has_adjacent_water {
-            let mut blockbrw = block.write().unwrap();
-            blockbrw.block_type = BlockType::Water;
-            std::mem::drop(blockbrw);
-            self.place_block(block);
-        } else {
-            self.render_chunks(chunks_to_rerender);
-        }
-    }
+    
     pub fn get_blocks_absolute(&self, position: &Vec3) -> Option<Arc<RwLock<Block>>> {
         let (chunk_x, chunk_y) = position.get_chunk_from_position_absolute();
 
@@ -319,10 +239,17 @@ impl World {
     }
     pub fn init_chunks(&mut self, player: Arc<RwLock<Player>>) {
         let (sender, receiver) = mpsc::channel();
-        let player = player.read().unwrap();
-
-        for chunk_x in LB + player.current_chunk.0..=UB + player.current_chunk.0 {
-            for chunk_y in LB + player.current_chunk.1..=UB + player.current_chunk.1 {
+        let mut player_write = player.write().unwrap();
+    
+        // Establecer posición inicial segura para el jugador (en el centro del mapa, por ejemplo)
+        let initial_x = 0;
+        let initial_z = 0;
+        let initial_y = WATER_HEIGHT_LEVEL as f32 + 100.0; // Altura segura por encima del agua
+    
+        player_write.camera.eye = glam::Vec3::new(initial_x as f32, initial_y, initial_z as f32);
+    
+        for chunk_x in LB + player_write.current_chunk.0..=UB + player_write.current_chunk.0 {
+            for chunk_y in LB + player_write.current_chunk.1..=UB + player_write.current_chunk.1 {
                 let sender = sender.clone();
                 let noise_data = Arc::clone(&self.noise_data);
                 let chunk_data_layout = Arc::clone(&self.chunk_data_layout);
@@ -341,7 +268,7 @@ impl World {
                 });
             }
         }
-
+    
         for _ in 0..CHUNKS_PER_ROW * CHUNKS_PER_ROW {
             let chunk = receiver.recv().expect("Some chunks are missing");
             self.chunks
@@ -349,11 +276,11 @@ impl World {
                 .unwrap()
                 .insert((chunk.x, chunk.y), Arc::new(RwLock::new(chunk)));
         }
-
+    
         self.handle_outside_blocks();
-        // this is kinda slow
         self.render_chunks(self.chunks.read().unwrap().keys().collect::<Vec<_>>());
     }
+    
     // chunks: slice containing the chunk to re-render
     fn render_chunks<I>(&self, chunk_keys: Vec<I>)
     where

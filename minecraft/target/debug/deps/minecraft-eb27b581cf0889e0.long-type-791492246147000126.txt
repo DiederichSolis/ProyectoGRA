@@ -1,1 +1,0 @@
-for<'a, 'b, 'c, 'd, 'e> fn(bevy::prelude::Res<'a, bevy::prelude::Input<bevy::prelude::KeyCode>>, bevy::prelude::Query<'b, 'c, (&'d bevy::prelude::Camera, &'e mut bevy::prelude::Transform)>) {camera_movement}
